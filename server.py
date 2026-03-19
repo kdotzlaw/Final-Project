@@ -11,15 +11,18 @@ def emo_detector():
     # pass text to emotion_detector -- get resp
     resp = emotion_detector(txt)
 
-    # save dom emotion
-    dom = resp.pop("dominant_emotion")
+    
+    if resp['anger'] == None:
+        return "Invalid text! Please try again!"
+    else:
+        # save dom emotion
+        dom = resp.pop("dominant_emotion")
 
-    # trim out {}
-    str_resp = str(resp)
-    str_resp = str_resp[1:-2]
-
-    # format output
-    return f"For the given statement, the system response is {str_resp}. The dominant emotion is <strong>{dom}</strong>"
+        # trim out {}
+        str_resp = str(resp)
+        str_resp = str_resp[1:-2]
+        # format output
+        return f"For the given statement, the system response is {str_resp}. The dominant emotion is <strong>{dom}</strong>"
 
 # render base template
 @app.route("/")
